@@ -1,0 +1,437 @@
+<html>
+<head>
+<title>Unicode Voyager</title>
+
+<style>
+
+    #container {
+        background-color: #FFFFFF;
+        position: absolute;
+        left: 0%;
+        height: 90%;
+        top: 0px;
+    }
+    
+.charBlock {
+border: 1px solid #000000;
+}
+
+    .latin {
+        background-color: #FFFF00;
+    }
+    
+    .greek {
+        background-color: #AFCFFF;
+    }
+    
+    .cyrillic {
+        background-color: #FF8888;
+    }
+    
+    .arabic {
+        background-color: #A8D880;
+    }
+    
+    .armenian {
+        background-color: #FFCF8A;
+    }
+    
+    .devanagari {
+        background-color: #DF88FF;
+    }
+    
+    .hebrew {
+        background-color: rgb(60, 90, 180);
+    }
+    
+    .khmer {
+        background-color: rgb(0, 255, 0);
+    }
+    
+    .geez {
+        background-color: rgb(210, 180, 150);
+    }
+    
+    .gujarati {
+        background-color: rgb(250, 210, 230);
+    }
+    
+    .georgian {
+        background-color: rgb(180, 75, 75);
+    }
+    
+    .tibetan {
+        background-color: rgb(210, 255, 255);
+    }
+    
+    .korean {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .burmese {
+        background-color: rgb(255, 150, 0);
+    }
+    
+    .tamil {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .thai {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .telugu {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .gurmukhi {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .odia {
+        background-color: #0000FF;
+    }
+    
+    .bengali {
+        background-color: #0000FE;
+    }
+    
+    .CAsyl {
+        background-color: #0000FD;
+    }
+    
+    .cherokee {
+        background-color: #FE0000;
+    }
+    
+    .ogham {
+        background-color: #FD0000;
+    }
+    
+    .mongolian {
+        background-color: #FC0000;
+    }
+    
+    .lao {
+        background-color: #FB0000;
+    }
+    
+    .syriac {
+        background-color: #FA0000;
+    }
+    
+    .thaana {
+        background-color: #F00000;
+    }
+    
+    .kannada {
+        background-color: rgb(248,0,0);
+    }
+    
+    .malayalam {
+        background-color: rgb(0,0,252);
+    }
+    
+    .nko {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .mandaic {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    .sinhala {
+        background-color: rgb(75, 135, 75);
+    }
+    
+    #specific {
+        border: 1px solid #D0D0D0;
+        background-color: #FFFFFF;
+        position: fixed;
+        height: 50%;
+        width: 15%;
+        left: 1500px;
+        top: 15%;
+        display: none;
+        text-align: center;
+    }
+
+#specificBlockBigDisplay {
+font-size: 96pt;
+}
+
+#specificDetails {
+font-size: 12pt;
+line-height: 20px;
+}
+
+#BW {
+position: fixed;
+background-color: #000000;
+height: 10px;
+width: 3%;
+top: 0%;
+right: 3%;
+}
+
+#HSL {
+position: fixed;
+background-color: #FF0000;
+height: 10px;
+width: 3%;
+top: 0%;
+right: 0%;
+}
+    
+div {
+margin: 0px;
+padding: 0px;
+}
+
+</style>
+
+</head>
+
+<script>
+
+var characterGroup;
+var codePointDecimal;
+
+
+//function myFunction() {
+//    glyph = String.fromCharCode(44060);
+//}
+
+function showAll() {
+    for (i=0; i<11000; i++) {
+        //if (i % 48 == 0) {
+        //    var rowBlock = document.createElement("div");
+        //    document.getElementById("container").appendChild(rowBlock);
+        //}
+
+        var block = document.createElement("div");
+        // the next two lines write the actual character in the little blocks, and add it
+        var textContent = document.createTextNode(String.fromCharCode(i));
+        block.appendChild(textContent);
+        // the following line used to be "rowBlock.appendChild(block)":
+        document.getElementById("container").appendChild(block);
+
+
+        block.setAttribute('id','char'+i);
+        block.setAttribute('onclick','showSpecific(this)');
+
+        //block.style.backgroundColor = bkgdColorArray[i%2];
+        
+        if (i >= 65 && i <= 90 || i >= 97 && i <= 122 || i >= 192 && i <= 563 || i >= 7680 && i <= 7834 || i >= 7840 && i <= 7929) {    
+            block.setAttribute('class',"charBlock latin"); }    // Latin -- yellow
+        else if (i >= 902 && i <= 993 || i >= 7936 && i <= 8188) {
+            block.setAttribute('class',"charBlock greek"); }      // Greek -- blue
+        else if (i >= 1033 && i <= 1327) {
+            block.setAttribute('class',"charBlock cyrillic"); }      // Cyrillic -- red
+        else if (i >= 1568 && i <= 1745 || i >= 1872 && i <= 1919 || i >= 2208 && i <= 2237) {
+            block.setAttribute('class',"charBlock arabic"); }      // Arabic -- green
+        else if (i >= 1329 && i <= 1415) {
+            block.setAttribute('class',"charBlock armenian"); }      // Armenian -- orange
+        else if (i >= 2304 && i <= 2431) {
+            block.setAttribute('class',"charBlock devanagari"); }      // Devanagari -- purple
+        else if (i >= 1488 && i <= 1524) {
+            block.setAttribute('class',"charBlock hebrew"); }      // Hebrew -- dark blue
+        else if (i >= 6016 && i <= 6137) {
+            block.setAttribute('class',"charBlock khmer"); }      // Khmer -- bright green
+        else if (i >= 4608 && i <= 5017) {
+            block.setAttribute('class',"charBlock geez"); }     // Ge'ez -- tan
+        else if (i >= 2693 && i <= 2785) {
+            block.setAttribute('class',"charBlock gujarati"); }      // Gujarati -- pink
+        else if (i >= 7312 && i <= 7345 || i >= 4256 && i <= 4351) {
+            block.setAttribute('class',"charBlock georgian"); }      // Georgian -- dark red
+        else if (i >= 3840 && i <= 4058) {
+            block.setAttribute('class',"charBlock tibetan"); }      // Tibetan -- light cyan
+        else if (i >= 4352 && i <= 4607) {
+            block.setAttribute('class',"charBlock korean"); }      // Korean -- dark green
+        else if (i >= 4096 && i <= 4255) {
+            block.setAttribute('class',"charBlock burmese"); }      // Burmese -- medium orange
+        else if (i >= 2949 && i <= 3066) {
+            block.setAttribute('class',"charBlock tamil"); }     // Tamil -- dark yellow
+        else if (i >= 3585 && i <= 3674) {
+            block.setAttribute('class',"charBlock thai"); }      // Thai -- pale yellow
+        else if (i >= 3077 && i <= 3199) {
+            block.setAttribute('class',"charBlock telugu"); }      // Telugu -- turquoise
+        else if (i >= 2565 && i <= 2654) {
+            block.setAttribute('class',"charBlock gurmukhi"); }      // Gurmukhi -- ???
+        else if (i >= 2817 && i <= 2935) {
+            block.setAttribute('class',"charBlock odia"); }      // Odia -- ???
+        else if (i >= 2432 && i <= 2558) {
+            block.setAttribute('class',"charBlock bengali"); }      // Bengali? -- ???
+        else if (i >= 5120 && i <= 5759) {
+            block.setAttribute('class',"charBlock CAsyl"); }      // Canadian Aboriginal syllabary -- ???
+        else if (i >= 5024 && i <= 5117) {
+            block.setAttribute('class',"charBlock cherokee"); }      // Cherokee -- ???
+        else if (i >= 5760 && i <= 5788) {
+            block.setAttribute('class',"charBlock ogham"); }      // Ogham -- ???
+        else if (i >= 6144 && i <= 6314) {
+            block.setAttribute('class',"charBlock mongolian"); }      // Mongolian -- ???
+        else if (i >= 3713 && i <= 3807) {
+            block.setAttribute('class',"charBlock lao"); }      // Lao -- ???
+        else if (i >= 1792 && i <= 1871) {
+            block.setAttribute('class',"charBlock syriac"); }      // Syriac -- ???
+        else if (i >= 1920 && i <= 1969) {
+            block.setAttribute('class',"charBlock thaana"); }      // Thaana -- ???
+        else if (i >= 3200 && i <= 3314) {
+            block.setAttribute('class',"charBlock kannada"); }      // Kannada -- ???
+        else if (i >= 3328 && i <= 3455) {
+            block.setAttribute('class',"charBlock malayalam"); }      // Malayalam -- ???
+        else if (i >= 1984 && i <= 2047) {
+            block.setAttribute('class',"charBlock nko"); }      // NKo -- ???
+        else if (i >= 2112 && i <= 2142) {
+            block.setAttribute('class',"charBlock mandaic"); }      // Mandaic -- ???
+        else if (i >= 3457 && i <= 3572) {
+            block.setAttribute('class',"charBlock sinhala"); }      // Sinhala -- ???
+        
+        
+        else if (i >= 618 && i <= 661 || i >= 664 && i <= 669 || i >= 671 && i <= 680) {
+            block.style.backgroundColor = "rgb(255, 255, 255)"; }      // IPA -- white
+        else if (i >= 48 && i <= 63 || i >= 8730 && i <= 8755 || i >= 8834 && i <= 8843 || i >= 9785 && i <= 9878) {
+            block.style.color = "#FFFFFF";
+            block.style.backgroundColor = "#000000"; }      // black -- numbers, punctuation, math symbols
+        else {
+            block.style.backgroundColor = "#EEEEEE"; }      // gray -- not yet analyzed
+        block.style.width = "30px";
+        block.style.height = "30px";
+        block.style.fontSize = "16pt";
+        block.style.position = "absolute";
+        
+        block.style.left = (i % 48)*30 + "px";
+        block.style.top = 30*Math.floor(i/48) + "px";
+
+    }
+}
+
+function showSpecific(elem) {
+    document.getElementById("specific").style.display = "block";
+    switch(elem.style.backgroundColor) {
+        case "rgb(255, 255, 0)":
+            characterGroup = "Latin alphabet";
+            break;
+        case "rgb(175, 207, 255)":
+            characterGroup = "Greek alphabet";
+            break;
+        case "rgb(255, 136, 136)":
+            characterGroup = "Cyrillic alphabet";
+            break;
+        case "rgb(168, 216, 128)":
+            characterGroup = "Arabic alphabet";
+            break;
+        case "rgb(255, 207, 138)":
+            characterGroup = "Armenian alphabet";
+            break;
+        case "rgb(223, 136, 255)":
+            characterGroup = "Devanagari";
+            break;
+        case "rgb(60, 90, 180)":
+            characterGroup = "Hebrew";
+            break;
+        case "rgb(0, 255, 0)":
+            characterGroup = "Khmer";
+            break;
+        case "rgb(210, 180, 150)":
+            characterGroup = "Ge'ez";
+            break;
+        case "rgb(250, 210, 230)":
+            characterGroup = "Gujarati";
+            break;
+        case "rgb(180, 75, 75)":
+            characterGroup = "Georgian alphabet";
+            break;
+        case "rgb(210, 255, 255)":
+            characterGroup = "Tibetan";
+            break;
+        case "rgb(75, 135, 75)":
+            characterGroup = "Korean";
+            break;
+        case "rgb(255, 150, 0)":
+            characterGroup = "Burmese";
+            break;
+        case "rgb(180, 165, 0)":
+            characterGroup = "Tamil";
+            break;
+        case "rgb(255, 255, 165)":
+            characterGroup = "Thai";
+            break;
+        case "rgb(60, 190, 190)":
+            characterGroup = "Telugu";
+            break;
+        case "rgb(255, 0, 0)":
+            characterGroup = "Gurmukhi";
+            break;
+        case "rgb(0, 0, 255)":
+            characterGroup = "Odia";
+            break;
+        case "rgb(0, 0, 254)":
+            characterGroup = "Bengali";
+            break;
+        case "rgb(0, 0, 253)":
+            characterGroup = "Canadian Aboriginal Syllabics";
+            break;
+        case "rgb(254, 0, 0)":
+            characterGroup = "Cherokee";
+            break;
+        case "rgb(253, 0, 0)":
+            characterGroup = "Ogham";
+            break;
+        case "rgb(252, 0, 0)":
+            characterGroup = "Mongolian";
+            break;
+        case "rgb(251, 0, 0)":
+            characterGroup = "Lao";
+            break;
+        case "rgb(250, 0, 0)":
+            characterGroup = "Syriac";
+            break;
+        case "rgb(249, 0, 0)":
+            characterGroup = "Thaana";
+            break;
+        case "rgb(248, 0, 0)":
+            characterGroup = "Kannada";
+            break;
+        case "rgb(0, 0, 252)":
+            characterGroup = "Malayalam";
+            break;
+        default:
+            characterGroup = "Group not found";
+    }
+    codePointDecimal = elem.id.slice(4,);
+    document.getElementById("specificBlockBigDisplay").innerHTML = String.fromCharCode(elem.id.slice(4,9));
+    document.getElementById("specificDetails").innerHTML = "Code point " + codePointDecimal;
+    document.getElementById("specificDetails").innerHTML += "<br>U+" + (Number(codePointDecimal).toString(16)).toUpperCase();
+    document.getElementById("specificDetails").innerHTML += "<br>" + characterGroup;
+}
+
+function switchToBW() {
+    for (i=44032; i<55204; i++) {
+    }
+}
+
+function switchToHSL() {
+    for (i=44032; i<55204; i++) {
+    }
+}
+
+
+
+</script>
+
+
+<body onload="showAll()">
+
+<div id="container"></div>
+
+<div id="specific">
+<span id="specificBlockBigDisplay"></span>
+<div id="specificDetails"></div>
+</div>
+
+<div id="BW" onclick="switchToBW()"></div>
+<div id="HSL" onclick="switchToHSL()"></div>
+
+</body>
+</html>
